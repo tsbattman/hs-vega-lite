@@ -1,12 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
+module Main (main) where
 
 import Prelude hiding (div, head, id)
 import Data.Aeson
 import Graphics.Vega.Lite
 import Text.Blaze.Html.Renderer.Pretty
-import Text.Blaze.Html5 as H hiding (map, object)
+import Text.Blaze.Html5 as H hiding (a, b, map, main, object)
 import Text.Blaze.Html5.Attributes as A hiding (title, style)
 import qualified Data.ByteString.Lazy.Char8 as B8
 import qualified Data.Text as T
