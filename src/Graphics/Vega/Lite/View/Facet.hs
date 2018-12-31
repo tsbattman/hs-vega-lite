@@ -7,6 +7,8 @@ module Graphics.Vega.Lite.View.Facet (
   , facetToObject
   ) where
 
+import Data.Maybe (maybeToList)
+
 import Data.Aeson ((.=), Object, ToJSON(..), object)
 import qualified Data.HashMap.Strict as HashMap
 
@@ -15,15 +17,14 @@ import Graphics.Vega.Lite.View.Common
 import Graphics.Vega.Lite.View.Layer (LayerSpec)
 
 data FacetMapping = FacetMapping {
-    facetRow :: FieldDefinition FacetFieldDef
-  , facetColumn :: FieldDefinition FacetFieldDef
+    facetRow :: Maybe (FieldDefinition FacetFieldDef)
+  , facetColumn :: Maybe (FieldDefinition FacetFieldDef)
   }
 
 instance ToJSON FacetMapping where
-  toJSON (FacetMapping r c) = object [
-      "row" .= r
-    , "column" .= c
-    ]
+  toJSON (FacetMapping r c) = object $
+    ["row" .= ri | ri <- maybeToList r] ++
+    ["column" .= ci | ci <- maybeToList c]
 
 data FacetView = FacetView {
     facetCommon :: Maybe CommonView
