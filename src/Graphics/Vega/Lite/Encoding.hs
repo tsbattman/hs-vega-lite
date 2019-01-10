@@ -343,20 +343,25 @@ instance ToJSON FacetFieldDef where
   toJSON (FacetFieldDef hdr) = object [ "header" .= hdr ]
 
 data Encoding = Encoding {
-    encodeX       :: ChannelDefinition PositionFieldDef
-  , encodeY       :: ChannelDefinition PositionFieldDef
-  , encodeX2      :: ChannelDefinition () -- No position field def since x2 shares with x and y2 for y
-  , encodeY2      :: ChannelDefinition ()
-  , encodeColor   :: ChannelDefinition MarkFieldDef
-  , encodeOpacity :: ChannelDefinition MarkFieldDef
-  , encodeSize    :: ChannelDefinition MarkFieldDef
-  , encodeShape   :: ChannelDefinition MarkFieldDef
-  , encodeText    :: ChannelDefinition TextFieldDef
-  , encodeTooltip :: ChannelDefinition TextFieldDef
-  , encodeDetail  :: ChannelDefinition DetailFieldDef
-  , encodeOrder   :: ChannelDefinition OrderFieldDef
-  , encodeRow     :: ChannelDefinition FacetFieldDef
-  , encodeColumn  :: ChannelDefinition FacetFieldDef
+    encodeX             :: ChannelDefinition PositionFieldDef
+  , encodeY             :: ChannelDefinition PositionFieldDef
+  , encodeX2            :: ChannelDefinition () -- No position field def since x2 shares with x and y2 for y
+  , encodeY2            :: ChannelDefinition ()
+  , encodeColor         :: ChannelDefinition MarkFieldDef
+  , encodeFill          :: ChannelDefinition MarkFieldDef
+  , encodeStroke        :: ChannelDefinition MarkFieldDef
+  , encodeOpacity       :: ChannelDefinition MarkFieldDef
+  , encodeFillOpacity   :: ChannelDefinition MarkFieldDef
+  , encodeStrokeOpacity :: ChannelDefinition MarkFieldDef
+  , encodeSize          :: ChannelDefinition MarkFieldDef
+  , encodeShape         :: ChannelDefinition MarkFieldDef
+  , encodeStrokeWidth   :: ChannelDefinition MarkFieldDef
+  , encodeText          :: ChannelDefinition TextFieldDef
+  , encodeTooltip       :: ChannelDefinition TextFieldDef
+  , encodeDetail        :: ChannelDefinition DetailFieldDef
+  , encodeOrder         :: ChannelDefinition OrderFieldDef
+  , encodeRow           :: ChannelDefinition FacetFieldDef
+  , encodeColumn        :: ChannelDefinition FacetFieldDef
   }
 
 instance ToJSON Encoding where
@@ -366,9 +371,14 @@ instance ToJSON Encoding where
     . addChannel "x2" encodeX2
     . addChannel "y2" encodeY2
     . addChannel "color" encodeColor
+    . addChannel "fill" encodeFill
+    . addChannel "stroke" encodeStroke
     . addChannel "opacity" encodeOpacity
+    . addChannel "fillOpacity" encodeFillOpacity
+    . addChannel "strokeOpacity" encodeStrokeOpacity
     . addChannel "size" encodeSize
     . addChannel "shape" encodeShape
+    . addChannel "strokeWidth" encodeStrokeWidth
     . addChannel "text" encodeText
     . addChannel "tooltip" encodeTooltip
     . addChannel "detail" encodeDetail
@@ -383,18 +393,23 @@ instance ToJSON Encoding where
 
 dfltEncoding :: Encoding
 dfltEncoding = Encoding {
-    encodeX       = NoChannel
-  , encodeY       = NoChannel
-  , encodeX2      = NoChannel
-  , encodeY2      = NoChannel
-  , encodeColor   = NoChannel
-  , encodeOpacity = NoChannel
-  , encodeSize    = NoChannel
-  , encodeShape   = NoChannel
-  , encodeText    = NoChannel
-  , encodeTooltip = NoChannel
-  , encodeDetail  = NoChannel
-  , encodeOrder   = NoChannel
-  , encodeRow     = NoChannel
-  , encodeColumn  = NoChannel
+    encodeX             = NoChannel
+  , encodeY             = NoChannel
+  , encodeX2            = NoChannel
+  , encodeY2            = NoChannel
+  , encodeColor         = NoChannel
+  , encodeFill          = NoChannel
+  , encodeStroke        = NoChannel
+  , encodeOpacity       = NoChannel
+  , encodeFillOpacity   = NoChannel
+  , encodeStrokeOpacity = NoChannel
+  , encodeSize          = NoChannel
+  , encodeShape         = NoChannel
+  , encodeStrokeWidth   = NoChannel
+  , encodeText          = NoChannel
+  , encodeTooltip       = NoChannel
+  , encodeDetail        = NoChannel
+  , encodeOrder         = NoChannel
+  , encodeRow           = NoChannel
+  , encodeColumn        = NoChannel
   }
